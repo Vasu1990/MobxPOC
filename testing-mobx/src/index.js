@@ -1,25 +1,48 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import App1 from './App1';
+import ProductList from './App';
+import MiniCart from './App1';
 import registerServiceWorker from './registerServiceWorker';
-import { extendObservable } from 'mobx';
+import {createStore} from './store';
 
 
-const appState = extendObservable(this, {
-    counter: 0,
-})
+createStore();
 
-appState.onIncrement = () => {
-    this.counter++;
-}
+window.reactComponents = {};
+window.reactComponents.productList = {
+    guid: 'root',
+    data: {
+        title : "Product List Component",
+        quantity : "Quantity",
+        name : "Name",
+        products  :[{
+            name:"productt1" ,
+            quantity : 10,
+            id: 1
+        },
+        {
+            name:"productt2" ,
+            quantity : 18,
+            id: 2
+        }
+        ]
 
-appState.onDecrement = () => {
-    this.counter--;
-}
+    }
+};
+window.reactComponents.miniCart = {
+    guid: 'root1',
+    data: {
+        title : "Mini Cart Component",
+        quantity : "Quantity",
+        name : "Name"
+    }
+};
 
-ReactDOM.render(<App store={appState} />, document.getElementById('root'));
-ReactDOM.render(<App1 store={appState} />, document.getElementById('root1'));
+
+
+
+ReactDOM.render(<ProductList data={window.reactComponents.productList.data} />, document.getElementById(window.reactComponents.productList.guid));
+ReactDOM.render(<MiniCart data={window.reactComponents.miniCart.data} />, document.getElementById(window.reactComponents.miniCart.guid));
 
 registerServiceWorker();
