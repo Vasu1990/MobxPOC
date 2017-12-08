@@ -11,6 +11,11 @@ export const createStore = () => {
   return store;
 }
 
+export const deleteProduct = (data) => { 
+  let selectedProduct = getSelectedProduct(data);
+  let index = store.sharedData.productList.indexOf(data.id);
+  store.sharedData.productList.splice(index,1);
+}
 
 export const updateProductStore = (data) => {
   let selectedProduct = undefined;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { observer } from 'mobx-react';
-import {getStore} from './store';
+import {getStore,deleteProduct} from './store';
 
 
 class App1 extends Component {
@@ -9,6 +9,10 @@ class App1 extends Component {
   constructor() {
     super();
     this.data = getStore();
+  }
+
+  deleteFromCart = (product) => {
+    deleteProduct(product);
   }
 
   render() {
@@ -22,6 +26,7 @@ class App1 extends Component {
                       <div key={index}>
                         <p>{this.props.data.name} : {product.name}</p>
                         <p>{this.props.data.quantity} : {product.quantity}</p>
+                        <button onClick={this.deleteFromCart.bind(this,product)} type="button">delete</button>
                         <hr/>
                       </div>
                   )}
